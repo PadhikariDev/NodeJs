@@ -1,0 +1,50 @@
+ Node.js Architecture Explanation
+
+ => Node.js follows a single-threaded, event-driven architecture that is designed for handling concurrent operations efficiently.
+    It uses non-blocking I/O with the help of the event loop and thread pool behind the scenes.
+
+ => The architecture starts with a client (it can be a browser, mobile app, etc.) that makes a request to the Node.js server.
+
+ => When a request is made:
+      - It enters the Event Queue in Node.js.
+      - The Event Loop continuously monitors this queue.
+      - Based on the type of request, it handles the request in different ways:
+
+    1) Blocking Operation (Synchronous Task)
+       - If it's a blocking operation, it is sent to the Thread Pool.
+       - The Thread Pool is a pool of worker threads provided by the 'libuv' library.
+       - These threads take care of heavy or time-consuming operations (like file I/O, database calls).
+       - If a thread is free, it is assigned the task.
+       - Once the operation is done, the result is sent back to the Event Loop which then sends the response to the client.
+
+       🔹 Drawback:
+          - If too many blocking tasks are processed simultaneously, and all threads are busy, performance may suffer.
+          - This can result in server slowdown or crashes under heavy traffic.
+
+       🔹 Example (Blocking):
+            const fs = require("fs");
+            const data = fs.readFileSync("./test.txt", "utf-8");
+            console.log(data); // This blocks further execution until file is read
+
+    2) Non-Blocking Operation (Asynchronous Task)
+       - If it’s a non-blocking operation, Node.js immediately registers a callback function and continues executing the rest of the code.
+       - The actual operation (e.g., reading a file) is handled in the background.
+       - Once it completes, the callback is pushed to the Event Queue and executed by the Event Loop.
+
+       🔹 Benefit:
+          - Non-blocking operations improve performance under high load as they do not block the main thread.
+
+       🔹 Example (Non-blocking):
+            const fs = require("fs");
+            fs.readFile("./test.txt", "utf-8", (err, data) => {
+                if (err) throw err;
+                console.log(data); // Callback is triggered when file is read
+            });
+
+ => In summary:
+      - Node.js is single-threaded but handles concurrency using event-driven, non-blocking architecture.
+      - Blocking tasks are offloaded to the thread pool.
+      - Non-blocking tasks are processed without halting execution.
+      - This makes Node.js highly scalable and ideal for I/O-heavy applications.
+
+
