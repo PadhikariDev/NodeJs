@@ -36,6 +36,25 @@
 //     console.log("server has been started")
 // })
 
-/* 3) starting with the express  */
+/* 3) starting with the express  
+
+import http from "http";
+import express from "express";
+
+const app =express();
+
+app.get('/',(req,res)=>{
+    return res.send("Hello this is Home Page");
+});
+
+app.get('/about',(req,res)=>{
+    return res.send("Hello this is Home Page");
+});
+
+app.listen(3000,()=>{
+    console.log('Server started');
+})
+*/
+
 
 

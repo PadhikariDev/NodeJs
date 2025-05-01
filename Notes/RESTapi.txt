@@ -1,0 +1,82 @@
+✅ What is a RESTful API?
+        =>  REST stands for Representational State Transfer.
+            It is a software architectural style that defines a set of rules for creating web services.
+            RESTful APIs allow communication between client and server over HTTP using standard methods.
+
+
+🧠 Core Principles of REST
+
+                => Client-Server Architecture
+                    The client and server operate independently.
+                    Client sends requests; server sends responses.            
+                    Each request from client to server must contain all necessary information.
+                    Server does not store any session data between requests.
+                => Uniform Interface
+                        A consistent way to interact with resources using standard HTTP methods like GET, POST, PUT, DELETE, etc.
+                => Resource-Based
+                        Everything is considered a resource and is represented by a URL.
+        
+                => Cacheable
+                    Server responses should explicitly indicate whether caching is allowed for better performance.
+
+🌐 HTTP Methods in REST
+
+           => Method	Usage	Example
+                    GET	
+                    POST	
+                    PUT	
+                    PATCH	
+                    DELETE	
+
+🔄 SSR vs CSR
+
+Feature	SSR (Server Side Rendering) 	                                    CSR (Client Side Rendering)
+
+ => First Load Speed Slower (but with content)	                                 => Faster blank page, then loads data
+ => SEO Friendly	 Yes	                                                     => Needs work (or use Next.js etc.)
+ => Example Technologies	Express with EJS, PHP, Django	                     => React, Angular, Vue
+ => Ideal For	Static or SEO-focused pages                     	             => Dynamic SPAs (Single Page Applications)
+
+
+
+✅ Benefits of REST APIs
+
+     => Language-independent 
+     => Easy to scale
+     => Fast & lightweight 
+     => Easy to test with tools like Postman
+
+
+Example:
+
+        import express from 'express';
+        const app = express();
+
+        app.use(express.json());
+
+        let users = [{ id: 1, name: "John" }];
+
+        app.get('/users', (req, res) => {
+            res.json(users);
+        });
+
+        app.post('/users', (req, res) => {
+            users.push(req.body);
+            res.status(201).json({ message: "User created" });
+        });
+
+        app.put('/users/:id', (req, res) => {
+            const id = parseInt(req.params.id);
+            users = users.map(user => user.id === id ? req.body : user);
+            res.json({ message: "User updated" });
+        });
+
+        app.delete('/users/:id', (req, res) => {
+            const id = parseInt(req.params.id);
+            users = users.filter(user => user.id !== id);
+            res.json({ message: "User deleted" });
+        });
+
+        app.listen(3000, () => {
+            console.log("Server is running on port 3000");
+        });
