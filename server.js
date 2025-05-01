@@ -7,17 +7,35 @@
 // console.log(extra.sub(2,5));
 
 
-//creating http server
-import http from "http";
-import fs from "fs"
-const httpServer =http.createServer((req , res)=>{
-    const result = `${Date.now()}:Request Received : ${req.method}\n`
-    fs.appendFile("log.txt",result,(err)=>{
-    console.log("new log has been created");   
-    res.end("hello from the server side");
-    })
-});
+// 2) => creating http server
+// import http from "http";
+// import fs from "fs"
+// import url from "url";
 
-httpServer.listen(3000, ()=>{
-    console.log("server has been started")
-})
+// const httpServer =http.createServer((req , res)=>{
+//     const result = `${Date.now()}:Request Received : ${req.method}\n`
+//     const myUrl = url.parse(req.url,true)
+//     fs.appendFile("log.txt",result,(err,data)=>{
+//         switch(myUrl.pathname){
+//             case "/":
+//                 res.end('Homepage');
+//                 break;
+//             case "/about":
+//                 console.log(myUrl);
+//                 res.end(`Hi ${myUrl.query.myName}`);
+//                 break;
+//             default:
+//                 res.end('404 server error');
+//                 break;
+//         }
+//     })
+// });
+
+// //3)=> listening to the port for the server
+// httpServer.listen(3000, ()=>{
+//     console.log("server has been started")
+// })
+
+/* 3) starting with the express  */
+
+

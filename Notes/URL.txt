@@ -1,0 +1,33 @@
+🌐 URL, Domain & Query Parameters
+    URL (Uniform Resource Locator)
+    A complete web address used to locate a resource.
+    Example: https://www.prashant.com
+
+Domain
+    A human-readable name pointing to a server’s IP address.
+    Example: www.prashant.com
+
+Query Parameters
+    Extra info passed in a URL (starts with ?) to filter or customize a request.
+    Example: ...?query=nodejs&page=2
+
+📡 HTTP Methods (Request Types)
+    GET – Retrieve data from the server.
+        Default method used when browsing.
+        📍 Example: Fetching a list of products.
+
+    POST – Send data to the server (create or submit).
+        📍 Example: Submitting a form.
+
+    PUT – Add or replace a resource on the server.
+        📍 Example: Updating a user profile.
+
+    DELETE – Remove a resource from the server.
+         📍 Example: Deleting a user or item.
+
+    PATCH – Partially update an existing resource.
+        📍 Example: Editing just the username.
+
+    HEAD – Same as GET, but only retrieves headers (no content).
+
+    CONNECT – Establishes a tunnel for communication (used with SSL).
