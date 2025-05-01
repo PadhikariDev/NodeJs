@@ -64,7 +64,7 @@ Get /users/1 -list user with id 1
 Post /users - creates new user
 Patch /users/id - edit the user with id 1 
 Delete /users/id - deltes the users with id 
-*/
+Using middle ware for post methods
 
 
 import express from "express";
@@ -92,14 +92,10 @@ app.get('/api/users',(req,res)=>{
     res.json(data);
 })
 
-app.get('/api/users/1',(req,res)=>{
-   const user = data.find(user=>user.id==1);
-   if(user){
-    res.json(user);
-   }
-   else{
-    res.status(404);
-   }
+app.get('/api/users/:id',(req,res)=>{
+   const id =Number(req.params.id);
+   const user = data.find(user=> user.id===id);
+   return res.json(user);
 })
 
 app.post('/api/users',(req,res)=>{
@@ -113,7 +109,10 @@ app.post('/api/users',(req,res)=>{
 app.listen(port,()=>{
     console.log(`Server started at ${port}`);
 })
-}).catch(err =>{
+})
+.catch(err =>{
     console.log("Failed to start the server");
 })
+
+*/
 
