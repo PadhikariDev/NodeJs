@@ -58,3 +58,62 @@ app.listen(3000,()=>{
 
 
 
+/* Creating RESTapi 
+Get /users -list all user
+Get /users/1 -list user with id 1
+Post /users - creates new user
+Patch /users/id - edit the user with id 1 
+Delete /users/id - deltes the users with id 
+*/
+
+
+import express from "express";
+import {readFile} from "fs/promises";
+
+let data;
+async function loadData() {
+    try {
+        data = JSON.parse(await readFile(new URL('./MOCK_DATA.json', import.meta.url)));
+    } catch (err) {
+        console.error('Error loading MOCK_DATA.json:', err);
+        process.exit(1);  
+    }
+}
+
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+
+
+loadData().then(()=>{
+    
+app.get('/api/users',(req,res)=>{
+    res.json(data);
+})
+
+app.get('/api/users/1',(req,res)=>{
+   const user = data.find(user=>user.id==1);
+   if(user){
+    res.json(user);
+   }
+   else{
+    res.status(404);
+   }
+})
+
+app.post('/api/users',(req,res)=>{
+    const newUser = req.body;
+    newUser.id=data.length +1;
+    data.push(newUser);
+    res.status(201).json(data);
+})
+
+
+app.listen(port,()=>{
+    console.log(`Server started at ${port}`);
+})
+}).catch(err =>{
+    console.log("Failed to start the server");
+})
+

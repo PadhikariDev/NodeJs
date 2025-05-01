@@ -1,0 +1,73 @@
+
+[
+    {
+        "id": 1,
+        "first_name": "Antonin",
+        "last_name": "Matysik",
+        "email": "amatysik0@infoseek.co.jp",
+        "gender": "Male"
+    },
+    {
+        "id": 2,
+        "first_name": "Kerr",
+        "last_name": "Adan",
+        "email": "kadan1@vk.com",
+        "gender": "Male"
+    },
+    {
+        "id": 3,
+        "first_name": "Willard",
+        "last_name": "Alfonsetti",
+        "email": "walfonsetti2@linkedin.com",
+        "gender": "Male"
+    },
+    {
+        "id": 4,
+        "first_name": "Bat",
+        "last_name": "Vint",
+        "email": "bvint3@unesco.org",
+        "gender": "Bigender"
+    },
+    {
+        "id": 5,
+        "first_name": "Svend",
+        "last_name": "Huson",
+        "email": "shuson4@biblegateway.com",
+        "gender": "Male"
+    },
+    {
+        "id": 6,
+        "first_name": "Cecilla",
+        "last_name": "Gandy",
+        "email": "cgandy5@tuttocitta.it",
+        "gender": "Female"
+    },
+    {
+        "id": 7,
+        "first_name": "Nonna",
+        "last_name": "Krink",
+        "email": "nkrink6@arstechnica.com",
+        "gender": "Female"
+    },
+    {
+        "id": 8,
+        "first_name": "Amanda",
+        "last_name": "Kimmel",
+        "email": "akimmel7@ycombinator.com",
+        "gender": "Female"
+    },
+    {
+        "id": 9,
+        "first_name": "Florina",
+        "last_name": "Khan",
+        "email": "fkhan8@weebly.com",
+        "gender": "Bigender"
+    },
+    {
+        "id": 10,
+        "first_name": "Guido",
+        "last_name": "Lesper",
+        "email": "glesper9@google.es",
+        "gender": "Male"
+    }
+]
