@@ -66,10 +66,8 @@ Patch /users/id - edit the user with id 1
 Delete /users/id - deltes the users with id 
 Using middle ware for post methods
 
-
-
 import express from "express";
-import {readFile} from "fs/promises";
+import { readFile } from "fs/promises";
 
 let data;
 async function loadData() {
@@ -77,7 +75,7 @@ async function loadData() {
         data = JSON.parse(await readFile(new URL('./MOCK_DATA.json', import.meta.url)));
     } catch (err) {
         console.error('Error loading MOCK_DATA.json:', err);
-        process.exit(1);  
+        process.exit(1);
     }
 }
 
@@ -86,41 +84,104 @@ const port = 3000;
 
 app.use(express.json());
 
-Middleware
-app.use((req,res,next)=>{
+//Middleware
+app.use((req, res, next) => {
     console.log("this is middleware 1!");
     next();
 })
 
-loadData().then(()=>{
-    
-app.get('/api/users',(req,res)=>{
-    res.json(data);
-})
+loadData().then(() => {
 
-app.get('/api/users/:id',(req,res)=>{
-   const id =Number(req.params.id);
-   const user = data.find(user=> user.id===id);
-   return res.json(user);
-})
+    app.get('/api/users', (req, res) => {
+        res.json(data);
+    })
 
-app.post('/api/users',(req,res)=>{
-    const newUser = req.body;
-    newUser.id=data.length +1;
-    data.push(newUser);
-    res.status(201).json(data);
-})
+    app.get('/api/users/:id', (req, res) => {
+        const id = Number(req.params.id);
+        const user = data.find(user => user.id === id);
+        return res.json(user);
+    })
+
+    app.post('/api/users', (req, res) => {
+        const newUser = req.body;
+        newUser.id = data.length + 1;
+        data.push(newUser);
+        res.status(201).json(data);
+    })
 
 
-app.listen(port,()=>{
-    console.log(`Server started at ${port}`);
+    app.listen(port, () => {
+        console.log(`Server started at ${port}`);
+    })
 })
-})
-.catch(err =>{
-    console.log("Failed to start the server");
-})
+    .catch(err => {
+        console.log("Failed to start the server");
+    })
+
 
 
 */
 
+//MongoDB connection with node express
 
+import express from "express";
+import { readFile } from "fs/promises";
+import mongoose from "mongoose";
+
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+
+//connecting mongo
+
+mongoose.connect("mongodb://127.0.0.1:27017/kylerDB").then(() => {
+    console.log("database has been connected")
+}).catch(err => { console.log("Db connection err", err) });
+
+//Schema 
+const userSchema = new mongoose.Schema({
+    firstName: {
+        type: String,
+        required: true
+    }, lastName: {
+        type: String,
+        required: false 
+    }, email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true
+    },
+})
+
+//model
+const User = mongoose.model("user", userSchema);
+
+app.post('/api/users',async(req,res)=>{
+    const body = req.body
+   const result = await User.create({
+        firstName:body.firstName,
+        lastName:body.lastName,
+        email:body.email,
+        password:body.password
+   });
+   console.log("Result",result);
+   res.status(201).json({message : 'sucess'});
+})
+
+app.get('/users',async(req,res)=>{
+    const alldbUsers= await User.find({});
+    const html=`
+    <ul>
+    ${alldbUsers.map((user)=>`<li>Name : ${user.firstName} <br> Email : ${user.email}</li> `).join("")}
+    </ul>`;
+    res.send(html);
+})
+
+app.listen(port, () => {
+    console.log(`Server started at ${port}`);
+})
