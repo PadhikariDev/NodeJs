@@ -1,0 +1,26 @@
+🧩 Middleware in Node.js (Express)
+
+🔄 What Happens Normally:
+        => A client sends a request.
+        => The server receives and processes the request.
+        => The server sends a response back to the client.
+
+🧱 What Middleware Does:
+        => Middleware functions act as intermediate layers between the client request and the server response.
+        => When a client sends a request:
+
+
+🔍 Middleware can perform operations like:
+
+        => Validating requests
+        => Logging
+        => Checking authentication
+        => Parsing body, cookies, etc.
+
+☑️ If the request is valid, middleware calls next() to send the request forward to the route.
+
+❌ If the request is invalid, middleware can send a response directly, without letting it reach the route handler.
+
+🔗 Multiple Middleware:
+        => You can use multiple middleware functions in sequence.
+        => Each one can perform a specific task and pass control using next().

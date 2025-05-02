@@ -67,6 +67,7 @@ Delete /users/id - deltes the users with id
 Using middle ware for post methods
 
 
+
 import express from "express";
 import {readFile} from "fs/promises";
 
@@ -85,6 +86,11 @@ const port = 3000;
 
 app.use(express.json());
 
+Middleware
+app.use((req,res,next)=>{
+    console.log("this is middleware 1!");
+    next();
+})
 
 loadData().then(()=>{
     
@@ -114,5 +120,7 @@ app.listen(port,()=>{
     console.log("Failed to start the server");
 })
 
+
 */
+
 
