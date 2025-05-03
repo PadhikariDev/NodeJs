@@ -123,7 +123,7 @@ loadData().then(() => {
 */
 
 //MongoDB connection with node express
-
+/*
 import express from "express";
 import { readFile } from "fs/promises";
 import mongoose from "mongoose";
@@ -184,4 +184,10 @@ app.get('/users',async(req,res)=>{
 
 app.listen(port, () => {
     console.log(`Server started at ${port}`);
-})
+})\
+
+*/
+
+//we have refactor the above code in index.js 
+
+
